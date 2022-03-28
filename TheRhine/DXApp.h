@@ -1,7 +1,7 @@
 #pragma once
 #include <d3d11.h>
 #include "Triangle.h"
-class Graphics
+class DXApp
 {
 	ID3D11Device* device;
 	ID3D11DeviceContext* deviceContext;
@@ -15,8 +15,8 @@ class Graphics
 	int width = 900, height = 700;
 
 public:
-	Graphics();
-	~Graphics();
+	DXApp();
+	~DXApp();
 	void InitializeDirectX(HWND hwnd);
 	void InitializeScene();
 	void Render();

@@ -1,10 +1,10 @@
-#include "Graphics.h"
+#include "DXApp.h"
 
-Graphics::Graphics()
+DXApp::DXApp()
 {
 }
 
-Graphics::~Graphics()
+DXApp::~DXApp()
 {
 	swapChain->Release();
 	device->Release();
@@ -12,7 +12,7 @@ Graphics::~Graphics()
 	rendertargetView->Release();
 }
 
-void Graphics::InitializeDirectX(HWND hwnd)
+void DXApp::InitializeDirectX(HWND hwnd)
 {
 	ZeroMemory(&swapchainDesc, sizeof(DXGI_SWAP_CHAIN_DESC));
 	swapchainDesc.BufferDesc.Width = width;
@@ -50,12 +50,12 @@ void Graphics::InitializeDirectX(HWND hwnd)
 	deviceContext->RSSetViewports(1, &viewPort);
 }
 
-void Graphics::InitializeScene()
+void DXApp::InitializeScene()
 {
 	triangle.SetPos(XMFLOAT2(-0.5f, 0.0f), XMFLOAT2(0.5f, 0.0f), XMFLOAT2(0.0f, 0.5f));
 }
 
-void Graphics::Render()
+void DXApp::Render()
 {
 	float bgColor[] = { 1.0f, 0.0f, 0.0f, 1.0f };
 	deviceContext->ClearRenderTargetView(rendertargetView, bgColor);
