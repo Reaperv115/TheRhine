@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DXApp.cpp" />
+    <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="RenderWindow.cpp" />
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="StringConverter.cpp" />
@@ -151,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DXApp.h" />
+    <ClInclude Include="GameTimer.h" />
     <ClInclude Include="RenderWindow.h" />
     <ClInclude Include="StringConverter.h" />
     <ClInclude Include="Triangle.h" />
