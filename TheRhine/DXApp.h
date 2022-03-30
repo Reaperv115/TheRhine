@@ -1,6 +1,12 @@
 #pragma once
 #include <d3d11.h>
-#include "Triangle.h"
+#include <Windows.h>
+#include <iostream>
+#include "StringConverter.h"
+
+#pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "DirectXTK.lib")
+
 class DXApp
 {
 public:
@@ -14,25 +20,27 @@ public:
 
 	int Run();
 
-	virtual bool Init();
+	virtual void Init();
 	virtual bool OnResize();
-	virtual bool UpdateScene(float dt) = 0;
+	virtual bool UpdateScene() = 0;
 	virtual void DrawScene() = 0;
 	virtual LRESULT MsgProch(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 protected:
 	bool InitMainWindow();
 	void CalculateFrameStats();
+	void RegisterWindow();
 
 protected:
 	HINSTANCE mAppInst; //application instance handle
 	HWND mMainWnd;		//main window handle
+	DWORD style = WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU;
 	bool mAppPaused;	//is the app paused
 	bool mMinimized;	// is the window minimized
 	bool mMaximized;	// is the window maximized
 	bool mResizing;		// is the window being resized
 
-	void InitializeDirectX(HWND hwnd);
+	void InitializeDirectX();
 	void InitializeScene();
 	void Render();
 
@@ -43,7 +51,9 @@ protected:
 	ID3D11RenderTargetView* rendertargetView;
 	ID3D11Texture2D* backBuffer;
 	D3D11_VIEWPORT viewPort;
-	Triangle triangle;
+
+	std::wstring windowclassName;
+	std::wstring windowName;
 
 	int width = 900, height = 700;
 

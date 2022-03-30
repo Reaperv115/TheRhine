@@ -1,7 +1,12 @@
 #include "DXApp.h"
 
 DXApp::DXApp()
+{}
+
+DXApp::DXApp(HINSTANCE hInst)
 {
+	mAppInst = hInst;
+	InitMainWindow();
 }
 
 DXApp::~DXApp()
@@ -12,7 +17,12 @@ DXApp::~DXApp()
 	rendertargetView->Release();
 }
 
-void DXApp::InitializeDirectX(HWND hwnd)
+HINSTANCE DXApp::AppInst() const
+{
+	return mAppInst;
+}
+
+void DXApp::InitializeDirectX()
 {
 	ZeroMemory(&swapchainDesc, sizeof(DXGI_SWAP_CHAIN_DESC));
 	swapchainDesc.BufferDesc.Width = width;
@@ -26,7 +36,7 @@ void DXApp::InitializeDirectX(HWND hwnd)
 	swapchainDesc.SampleDesc.Quality = 0;
 	swapchainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
 	swapchainDesc.BufferCount = 1;
-	swapchainDesc.OutputWindow = hwnd;
+	swapchainDesc.OutputWindow = mMainWnd;
 	swapchainDesc.Windowed = true;
 	swapchainDesc.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	swapchainDesc.Flags = DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH;
@@ -50,14 +60,72 @@ void DXApp::InitializeDirectX(HWND hwnd)
 	deviceContext->RSSetViewports(1, &viewPort);
 }
 
-void DXApp::InitializeScene()
-{
-	triangle.SetPos(XMFLOAT2(-0.5f, 0.0f), XMFLOAT2(0.5f, 0.0f), XMFLOAT2(0.0f, 0.5f));
-}
-
 void DXApp::Render()
 {
 	float bgColor[] = { 1.0f, 0.0f, 0.0f, 1.0f };
 	deviceContext->ClearRenderTargetView(rendertargetView, bgColor);
 	swapChain->Present(1, NULL);
+}
+
+bool DXApp::InitMainWindow()
+{
+	RegisterWindow();
+	mMainWnd = CreateWindowEx(0, windowclassName.c_str(), windowName.c_str(), style, 0, 0, width, height, NULL, NULL, mAppInst, nullptr);
+	ShowWindow(mMainWnd, SW_SHOW);
+	SetForegroundWindow(mMainWnd);
+	SetFocus(mMainWnd);
+	InitializeDirectX();
+	return true;
+}
+
+void DXApp::RegisterWindow()
+{
+	WNDCLASSEX wc;
+	wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
+	wc.lpfnWndProc = DefWindowProc;
+	wc.cbClsExtra = 0;
+	wc.cbWndExtra = 0;
+	wc.hInstance = mAppInst;
+	wc.hIcon = NULL;
+	wc.hIconSm = NULL;
+	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+	wc.hbrBackground = NULL;
+	wc.lpszMenuName = windowName.c_str();
+	wc.lpszClassName = windowclassName.c_str();
+	wc.cbSize = sizeof(WNDCLASSEX);
+	RegisterClassEx(&wc);
+}
+
+int DXApp::Run()
+{
+	MSG msg;
+	ZeroMemory(&msg, sizeof(msg));
+	while (msg.message != WM_QUIT)
+	{
+		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+		else
+		{
+			DrawScene();
+		}
+	}
+	
+	return (int)msg.wParam;
+}
+
+void DXApp::Init()
+{
+}
+
+bool DXApp::OnResize()
+{
+	return false;
+}
+
+LRESULT DXApp::MsgProch(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	return LRESULT();
 }

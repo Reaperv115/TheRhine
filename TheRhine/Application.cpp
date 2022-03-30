@@ -1,26 +1,59 @@
-#include <Windows.h>
-#include <iostream>
-#include "RenderWindow.h"
-#include "Graphics.h"
-#pragma comment(lib, "d3d11.lib")
-#pragma comment(lib, "DirectXTK.lib")
+#include "DXApp.h"
 
-class Application
+class Application : public DXApp
 {
-	int APIENTRY wWinMain(_In_ HINSTANCE hInst,
-		_In_opt_ HINSTANCE hprevInst,
-		_In_ LPWSTR cmdLine,
-		_In_ int cmdShow)
-	{
 
-		RenderWindow rw;
-		while (rw.ProcessMessages())
-		{
-			rw.Render();
-		}
-		return 0;
-	}
+public:
+	Application();
+	Application(std::wstring className, std::wstring WindowName);
+	void Init();
+	bool UpdateScene();
+	void DrawScene();
+	~Application();
+
+
 };
+
+
+int wWinMain(HINSTANCE hInst,
+	HINSTANCE hprevInst,
+	LPWSTR cmdLine,
+	int cmdShow)
+{
+
+	Application app(L"The Rhine", L"Engine");
+	return app.Run();
+
+	return 0;
+}
+
+Application::Application(std::wstring className, std::wstring WindowName)
+{
+	windowclassName = className;
+	windowName = WindowName;
+	Init();
+}
+
+
+void Application::Init()
+{
+	InitMainWindow();
+	InitializeDirectX();
+}
+
+Application::~Application()
+{
+}
+
+bool Application::UpdateScene()
+{
+	return true;
+}
+void Application::DrawScene()
+{
+	Render();
+}
+
 
 
 
