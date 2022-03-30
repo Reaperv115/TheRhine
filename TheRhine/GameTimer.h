@@ -1,12 +1,14 @@
 #pragma once
+#include <Windows.h>
+
 class GameTimer
 {
 public:
 	GameTimer();
 
-	float GameTime() const;
 	float DeltaTime() const;
 
+	float TotalTime();
 	void Reset();
 	void Start();
 	void Stop();

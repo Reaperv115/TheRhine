@@ -1,8 +1,10 @@
 #pragma once
+
+#include <sstream>
 #include <d3d11.h>
-#include <Windows.h>
 #include <iostream>
 #include "StringConverter.h"
+#include "GameTimer.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "DirectXTK.lib")
@@ -51,6 +53,8 @@ protected:
 	ID3D11RenderTargetView* rendertargetView;
 	ID3D11Texture2D* backBuffer;
 	D3D11_VIEWPORT viewPort;
+	std::wstring mMwndCaption;
+	GameTimer gametimer;
 
 	std::wstring windowclassName;
 	std::wstring windowName;

@@ -78,6 +78,30 @@ bool DXApp::InitMainWindow()
 	return true;
 }
 
+void DXApp::CalculateFrameStats()
+{
+	static int frameCnt = 0;
+	static float timeElapsed = 0.0f;
+
+	frameCnt++;
+
+	if ((gametimer.TotalTime() - timeElapsed) >= 1.0f)
+	{
+		float fps = (float)frameCnt;
+		float mspf = 1000.0f / fps;
+
+		std::wostringstream ss;
+		ss.precision(6);
+		ss << mMwndCaption << L"   "
+			<< L"FPS: " << fps << L"  "
+			<< L"Frame Time: " << mspf << L"  (ms)";
+		SetWindowText(mMainWnd, ss.str().c_str());
+
+		frameCnt = 0;
+		timeElapsed += 1.0f;
+	}
+}
+
 void DXApp::RegisterWindow()
 {
 	WNDCLASSEX wc;
@@ -109,7 +133,16 @@ int DXApp::Run()
 		}
 		else
 		{
-			DrawScene();
+			gametimer.Tick();
+			if (!mAppPaused)
+			{
+				CalculateFrameStats();
+				DrawScene();
+			}
+			else
+			{
+				Sleep(100);
+			}
 		}
 	}
 	
