@@ -122,7 +122,8 @@ void DXApp::RegisterWindow()
 
 int DXApp::Run()
 {
-	MSG msg;
+	MSG msg = {0};
+	gametimer.Reset();
 	ZeroMemory(&msg, sizeof(msg));
 	while (msg.message != WM_QUIT)
 	{
