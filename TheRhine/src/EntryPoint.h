@@ -2,11 +2,11 @@
 
 #ifdef TR_PLATFORM_WINDOWS
 
-extern Rhine::Application* Rhine::CreateApplication();
+extern Rhine::DXApp* Rhine::CreateDXApp();
 
 int main(int argc, char** argv)
 {
-	auto app = Rhine::CreateApplication();
+	auto app = Rhine::CreateDXApp();
 	app->Run();
 	delete app;
 }
