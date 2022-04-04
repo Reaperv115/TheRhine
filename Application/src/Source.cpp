@@ -1,6 +1,6 @@
 #include "Rhine.h"
 
-class App : public Rhine::Application
+class App : public Rhine::DXApp
 {
 public:
 	App()
@@ -13,7 +13,7 @@ public:
 	}
 };
 
-Rhine::Application* Rhine::CreateApplication()
+Rhine::DXApp* Rhine::CreateDXApp()
 {
 	return new App();
 }
