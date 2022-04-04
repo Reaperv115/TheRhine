@@ -1,9 +1,0 @@
-﻿  Graphics.cpp
-G:\Dev\playing with C++\TheRhine\TheRhine\Graphics.cpp(46,19): warning C4244: '=': conversion from 'int' to 'FLOAT', possible loss of data
-G:\Dev\playing with C++\TheRhine\TheRhine\Graphics.cpp(47,20): warning C4244: '=': conversion from 'int' to 'FLOAT', possible loss of data
-  RenderWindow.cpp
-  Source.cpp
-  StringConverter.cpp
-  Triangle.cpp
-  Generating Code...
-  TheRhine.vcxproj -> G:\Dev\playing with C++\TheRhine\x64\Debug\TheRhine.exe
