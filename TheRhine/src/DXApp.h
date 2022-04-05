@@ -23,6 +23,7 @@ namespace Rhine
 		DWORD style = WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU;
 
 		void InitializeDirectX();
+		void InitMainWindow();
 		void InitializeScene();
 		void Render();
 
@@ -36,9 +37,12 @@ namespace Rhine
 		std::wstring mMwndCaption;
 
 		std::wstring windowclassName;
-		std::wstring windowName;
+		std::wstring windowmenuName;
 
 		int width = 900, height = 700;
+
+	private:
+		void RegisterWindow();
 	};
 
 	DXApp* CreateDXApp();
