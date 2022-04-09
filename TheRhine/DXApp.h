@@ -1,17 +1,21 @@
 #pragma once
+#include "TriangleVS.csh"
 
 #include <sstream>
 #include <d3d11.h>
+#include <DirectXMath.h>
 #include <iostream>
-#include <io.h>
-#include <fcntl.h>
 
 #include "StringConverter.h"
 #include "GameTimer.h"
 
+using namespace DirectX;
+
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "DirectXTK.lib")
 
+namespace Rhine
+{
 	class DXApp
 	{
 	public:
@@ -20,7 +24,7 @@
 		virtual ~DXApp();
 
 		HINSTANCE AppInst() const;
-		HWND MainWnd() const;
+		HWND GetMainWnd() const;
 		float AspectRatio() const;
 
 		int Run();
@@ -52,6 +56,9 @@
 		ID3D11Device* device;
 		ID3D11DeviceContext* deviceContext;
 		IDXGISwapChain* swapChain;
+		ID3D11InputLayout* itriangleLayout;
+		ID3D11VertexShader* triangleVS;
+		ID3D11PixelShader* trianglePS;
 		DXGI_SWAP_CHAIN_DESC swapchainDesc;
 		ID3D11RenderTargetView* rendertargetView;
 		ID3D11Texture2D* backBuffer;
@@ -59,11 +66,12 @@
 		std::wstring mMwndCaption;
 		GameTimer gametimer;
 
-		std::wstring windowclassName;
-		std::wstring windowName;
+		std::wstring windowclassName, windowName;
+		LPCWSTR messageboxMssge, messageboxTitle;
 
 		int width = 900, height = 700;
 
 
 	};
+}
 

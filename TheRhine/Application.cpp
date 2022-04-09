@@ -1,5 +1,19 @@
 #include "DXApp.h"
 
+namespace Rhine
+{
+	struct Vertex
+	{
+		XMFLOAT2 pos;
+	};
+
+	struct Triangle
+	{
+		Vertex positions[3];
+	};
+
+	
+
 	class Application : public DXApp
 	{
 
@@ -14,18 +28,6 @@
 
 	};
 
-
-	int wWinMain(HINSTANCE hInst,
-		HINSTANCE hprevInst,
-		LPWSTR cmdLine,
-		int cmdShow)
-	{
-		Application app(L"The Rhine", L"Engine");
-		return app.Run();
-
-		return 0;
-	}
-
 	Application::Application(std::wstring className, std::wstring WindowName)
 	{
 		windowclassName = className;
@@ -36,6 +38,7 @@
 
 	void Application::Init()
 	{
+		AllocConsole();
 		InitMainWindow();
 		InitializeDirectX();
 	}
@@ -53,6 +56,16 @@
 		Render();
 	}
 
+}
 
+int wWinMain(HINSTANCE hInst,
+	HINSTANCE hprevInst,
+	LPWSTR cmdLine,
+	int cmdShow)
+{
+	Rhine::Application app(L"The Rhine", L"Engine");
+	return app.Run();
+
+}
 
 

@@ -42,4 +42,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="TriangleVS.hlsl" />
+    <FxCompile Include="TrianglePS.hlsl" />
+  </ItemGroup>
 </Project>
