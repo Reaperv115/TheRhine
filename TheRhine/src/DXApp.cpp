@@ -14,21 +14,17 @@ namespace Rhine
 	{
 
 	}
-
-	void DXApp::Run()
-	{
-		while (true)
-		{
-
-		}
-	}
 	int DXApp::RunMessageLoop()
 	{
 		MSG msg = { 0 };
 		ZeroMemory(&msg, sizeof(msg));
-		while (true)
+		while (msg.message !=  WM_QUIT)
 		{
-
+			if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
 		}
 		return 0;
 	}

@@ -1,6 +1,7 @@
 #pragma once
 #include <d3d11.h>
 #include <iostream>
+
 #include "Core.h"
 
 #pragma comment(lib, "d3d11.lib")
@@ -15,7 +16,6 @@ namespace Rhine
 		DXApp(HINSTANCE hInst);
 		virtual ~DXApp();
 
-		void Run();
 		int RunMessageLoop();
 
 	protected:

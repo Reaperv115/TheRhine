@@ -3,4 +3,4 @@
 
 #include "DXApp.h"
 
-#include "EntryPoint.h"
+#include "DXEntryPoint.h"
