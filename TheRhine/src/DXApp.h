@@ -1,32 +1,27 @@
 #pragma once
-#include <d3d11.h>
-#include <iostream>
+#include <dxgi.h>
 
-#include "Core.h"
+#pragma comment(lib, "dxgi.lib")
 
-#pragma comment(lib, "d3d11.lib")
-#pragma comment(lib, "DirectXTK.lib")
+
+#include "Shaders/VertexShader.h"
+#include "Shaders/PixelShader.h"
+
+
 
 namespace Rhine
 {
-	class RHINE_API DXApp
+	class DXApp
 	{
 	public:
 		DXApp();
-		DXApp(HINSTANCE hInst);
-		virtual ~DXApp();
-
-		int RunMessageLoop();
-
-	protected:
-		HINSTANCE mAppInst;
-		HWND mMainWnd;
-		DWORD style = WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU;
-
+		~DXApp();
 		void InitializeDirectX();
-		void InitMainWindow();
 		void InitializeScene();
 		void Render();
+		HWND GetWindowHandle() const;
+
+		HWND windowhandle;
 
 		ID3D11Device* device;
 		ID3D11DeviceContext* deviceContext;
@@ -35,17 +30,20 @@ namespace Rhine
 		ID3D11RenderTargetView* rendertargetView;
 		ID3D11Texture2D* backBuffer;
 		D3D11_VIEWPORT viewPort;
-		std::wstring mMwndCaption;
+		D3D11_BUFFER_DESC bufferDesc;
+		D3D11_SUBRESOURCE_DATA subresource;
+		ID3D11Buffer* vertexBuffer;
+		IDXGIFactory* factoryInst;
 
-		std::wstring windowclassName;
-		std::wstring windowmenuName;
+		ID3D11InputLayout* ilayOut;
+		UINT stride;
+		UINT offset = 0;
+		VertexShader vShader;
+		PixelShader pShader;
+		ID3D10Blob* blob;
 
-		int width = 900, height = 700;
-
-	private:
-		void RegisterWindow();
+		int width = 1000;
+		int height = 500;
 	};
-
-	DXApp* CreateDXApp();
 }
 
