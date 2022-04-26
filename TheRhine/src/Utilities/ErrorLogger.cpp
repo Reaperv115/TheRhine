@@ -1,4 +1,4 @@
-#include "ErrorLogger.h"
+#include "rpch.h"
 namespace Rhine
 {
 	ErrorLogger::ErrorLogger()

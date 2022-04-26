@@ -1,3 +1,4 @@
+#include "rpch.h"
 #include "PixelShader.h"
 
 namespace Rhine

@@ -1,7 +1,4 @@
 #pragma once
-#include <dxgi.h>
-
-#pragma comment(lib, "dxgi.lib")
 
 
 #include "Shaders/VertexShader.h"

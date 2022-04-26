@@ -121,6 +121,9 @@
       <PreprocessorDefinitions>TR_PLATFORM_WINDOWS;BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>rpch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(SolutionDir)TheRhine\src;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,6 +154,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\rpch.h" />
     <ClInclude Include="src\Shaders\PixelShader.h" />
     <ClInclude Include="src\Utilities\ErrorLogger.h" />
     <ClInclude Include="src\DXApp.h" />
@@ -160,6 +165,10 @@
     <ClInclude Include="src\Utilities\StringConverter.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\rpch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\Shaders\PixelShader.cpp" />
     <ClCompile Include="src\Utilities\ErrorLogger.cpp" />
     <ClCompile Include="src\DXApp.cpp" />

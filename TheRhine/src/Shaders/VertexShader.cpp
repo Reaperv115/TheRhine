@@ -1,3 +1,4 @@
+#include "rpch.h"
 #include "VertexShader.h"
 
 namespace Rhine
